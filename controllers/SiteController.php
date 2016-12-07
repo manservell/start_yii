@@ -161,9 +161,9 @@ class SiteController extends Controller
         );
     }
     public function actionComments(){
-        $comments = coments::find()->all();
-        return $this->render('comments'
-
+        $comments = comments::find()->all();
+        return $this->render('comments',
+            ['comments'=>$comments]
         );
     }
 }
