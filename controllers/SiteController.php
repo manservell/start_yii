@@ -12,6 +12,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\comments;
 use app\models\MyForm;
+use yii\data\Pagination;
 
 class SiteController extends Controller
 {
@@ -161,9 +162,18 @@ class SiteController extends Controller
         );
     }
     public function actionComments(){
-        $comments = comments::find()->all();
+        $comments = comments::find();
+        $pagination = new Pagination([
+            'defaultPageSize' => 2,
+            'totalCount' => $comments->count()
+        ]);
+        $comments = $comments
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
         return $this->render('comments',
-            ['comments'=>$comments]
-        );
+            ['comments'=>$comments,
+            'pagination'=> $pagination
+            ]);
     }
 }
