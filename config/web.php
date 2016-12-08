@@ -15,7 +15,7 @@ $config = [
                 'enablePrettyUrl'=>true,
                 'showScriptName'=> false,
                 'rules' => [
-                    'about'=> 'site\about'
+                    'about'=> 'site/about'// поменял слеш
                 ]
        ],
         'cache' => [
