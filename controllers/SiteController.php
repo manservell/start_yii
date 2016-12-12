@@ -173,7 +173,18 @@ class SiteController extends Controller
             ->all();
         return $this->render('comments',
             ['comments'=>$comments,
-            'pagination'=> $pagination
+            'pagination'=> $pagination,
+             'name'=>Yii::$app->session->get('name')
             ]);
+    }
+    public function actionUser(){// вывод имени из адресной строки  и создание сессии
+        $name=Yii::$app->request->get("name", "Гость");
+       // $name=$_GET;
+        $session=Yii::$app->session;
+        $session->set('name', $name);
+        //$session->remove('name');
+        return $this->render('user',[
+            'name'=>$name
+        ]);
     }
 }
